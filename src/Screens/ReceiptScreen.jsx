@@ -20,7 +20,7 @@ function ReceiptScreen() {
         <button
           style={{ width: 300, marginTop: 100 }}
           onClick={() => history.push('/user-flow')}
-          className="btn-lg">Go in</button>
+          className="btn-lg">Naar binnen</button>
       </div>
     </Screen>
   );

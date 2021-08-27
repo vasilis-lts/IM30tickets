@@ -31,9 +31,9 @@ function BookingScreen() {
   const history = useHistory();
 
   const jsonTickets = [
-    { id: 1, title: "Adult", priority: 3, price: 4 },
-    { id: 2, title: "Child 12-17yr", priority: 2, price: 3 },
-    { id: 3, title: "Child 0-11yr", priority: 1, price: 2.5 },
+    { id: 1, title: "Volwassene", priority: 3, price: 4 },
+    { id: 2, title: "Kind 12-17yr", priority: 2, price: 3 },
+    { id: 3, title: "Kind 0-11yr", priority: 1, price: 2.5 },
   ];
 
   const [Cart, setCart] = useState([]);
@@ -133,7 +133,7 @@ function BookingScreen() {
           <div id="cartCheckout">
             <button
               onClick={() => handleCheckout()}
-              className="btn-lg">Checkout</button>
+              className="btn-lg">Afrekenen</button>
           </div>
           : null}
 

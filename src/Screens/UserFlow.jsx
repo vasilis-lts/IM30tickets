@@ -77,12 +77,12 @@ function UserFlow() {
 
       <div className="UserFlow flex-col ai-center" style={styles.UserFlow}>
         {FlowPhase === "PrepareToEnter" ? <>
-          <h1 style={{ width: "70%" }}>ENTER</h1>
+          <h1 style={{ width: "70%" }}>TOEGANG</h1>
           {Flow.length ? <h1>{Flow[FlowIndexActive].title} {Flow[FlowIndexActive].index ? Flow[FlowIndexActive].index : ''}</h1> : null}
           <button
             style={{ width: 300, marginTop: 100 }}
             onClick={() => setFlowPhase('Entering')}
-            className="btn-lg">Go in</button>
+            className="btn-lg">GA BINNEN!</button>
         </> : null}
 
         {FlowPhase === "Entering" ? <>
@@ -90,17 +90,17 @@ function UserFlow() {
         </> : null}
 
         {FlowPhase === "Next" ? <>
-          <h1>ENTRY<br /><br />SUCCESSFUL</h1>
+          <h1>TOEGANG<br /><br />SUCCESVOL</h1>
           {FlowIndexActive < Flow.length ?
             <button
-              style={{ width: 300, marginTop: 100 }}
+              style={{ width: 400, marginTop: 100 }}
               onClick={() => setFlowPhase('PrepareToEnter')}
-              className="btn-lg">NEXT</button>
+              className="btn-lg">VOLGENDE</button>
             :
             <button
               style={{ width: 400, marginTop: 100 }}
               onClick={() => history.push("/")}
-              className="btn-lg">NEXT CUSTOMER</button>
+              className="btn-lg">VOLGENDE KLANT</button>
           }
         </> : null}
       </div>

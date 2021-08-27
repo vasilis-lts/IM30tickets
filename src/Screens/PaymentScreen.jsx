@@ -30,10 +30,10 @@ function PaymentScreen() {
   return (
     <Screen verticalAlign="center">
       <div className="PaymentScreen flex-col ai-center" style={styles.paymentScreen}>
-        <h1 style={{ letterSpacing: 10 }}>PAYMENT</h1>
-        <h2>Amount</h2>
+        <h1 style={{ letterSpacing: 10 }}>AFREKENEN</h1>
+        <h2>BEDRAG</h2>
         {Total && <h2>{Total.toFixed(2).replace(".", ",")}</h2>}
-        <h2>OFFER YOUR DEBIT CARD</h2>
+        <h2>BIED UW PAS AAN</h2>
       </div>
     </Screen>
   );
