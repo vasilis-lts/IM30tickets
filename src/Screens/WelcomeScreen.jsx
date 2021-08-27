@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Screen from "../Components/Screen";
 import { CircleFlag } from 'react-circle-flags'
+import { useHistory } from "react-router-dom";
 
 const styles = {
   welcomeHeader: {
@@ -24,14 +25,18 @@ const styles = {
 }
 
 function WelcomeScreen() {
+  const history = useHistory();
 
   const [CountrySelected, setCountrySelected] = useState("");
 
   useEffect(() => {
     if (CountrySelected) {
       console.log("Country Selected: " + CountrySelected);
-
+      setTimeout(() => {
+        history.push('/booking')
+      }, 500);
     }
+    // eslint-disable-next-line
   }, [CountrySelected]);
 
   return (
