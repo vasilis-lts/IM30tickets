@@ -39,7 +39,7 @@ function UserFlow() {
       }, 2000);
     }
     if (FlowPhase === "Next") {
-      if (FlowIndexActive < Flow.length) {
+      if (FlowIndexActive >= Flow.length) {
         setTimeout(() => {
           history.push("/")
         }, 5000);
