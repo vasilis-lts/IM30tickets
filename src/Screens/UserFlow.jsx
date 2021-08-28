@@ -86,7 +86,7 @@ function UserFlow() {
         </> : null}
 
         {FlowPhase === "Entering" ? <>
-          <h1>Wait for person<br />to enter<br />through gate</h1>
+          <h1>Wacht tot persoon<br />binnen is</h1>
         </> : null}
 
         {FlowPhase === "Next" ? <>

@@ -32,8 +32,8 @@ function BookingScreen() {
 
   const jsonTickets = [
     { id: 1, title: "Volwassene", priority: 3, price: 4 },
-    { id: 2, title: "Kind 12-17yr", priority: 2, price: 3 },
-    { id: 3, title: "Kind 0-11yr", priority: 1, price: 2.5 },
+    { id: 2, title: "Kind 12-17jr", priority: 2, price: 3 },
+    { id: 3, title: "Kind 0-11jr", priority: 1, price: 2.5 },
   ];
 
   const [Cart, setCart] = useState([]);
