@@ -41,7 +41,7 @@ function BookingScreen() {
 
   useEffect(() => {
     console.log(Cart);
-    calculateTotal(Cart)
+    calculateTotal(Cart);
   }, [Cart]);
 
   function calculateTotal(Cart) {
@@ -89,8 +89,11 @@ function BookingScreen() {
   function handleCheckout() {
     const details = { Cart, Total }
     localStorage.setItem("IM30_Details", JSON.stringify(details));
+
     history.push({ pathname: `/payment`, state: { Cart, Total } })
   }
+
+
 
   return (
     <Screen verticalAlign="flex-start">

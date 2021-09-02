@@ -27,17 +27,47 @@
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="./payment.js"></script>
+  <script>
+    function handlePaymentResult(name, data) {
+      if (data === null) {
+        $("#divKimonoPaymentResult").text(name + ": Unknown payment result");
+      }
+      else {
+        console.log(data);
+        switch (data.success) {
+          case 0:
+            $("#divPaymentResult").text(name + ": ErrorRetry [" + (data.errorText ? data.errorText : "") + "]");
+            break;
+          case 1:
+            $("#divPaymentResult").text(name + ": CurrentPaymentSuccess");
+            break;
+          case 2:
+            $("#divPaymentResult").text(name + ": CurrentPaymentFailure");
+            break;
+          case 3:
+            $("#divPaymentResult").text(name + ": PreviousPaymentSuccess");
+            break;
+          case 4:
+            $("#divPaymentResult").text(name + ": PreviousPaymentFailure");
+            break;
+          default:
+            $("#divPaymentResult").text(name + ": Unknown result: " + data.successText);
+            break;
+        }
+      }
+      $("#divPaymentResult").show();
+    }
+
+    // window.pay = new window.payware({
+    //   url: "http://localhost:5000/api/kimono/",
+    //   onPaymentResultReceived: handlePaymentResult
+    // });
+
+  </script>
   <div id="root"></div>
-  <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
 </body>
 
 </html>
