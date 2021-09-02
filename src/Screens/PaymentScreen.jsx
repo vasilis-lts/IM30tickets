@@ -28,7 +28,6 @@ const PaymentScreen = ({ myRef }) => {
   }, []);
 
   function resultReceived(name, data) {
-    console.log(name, data)
     if (data.success === 1) {
       history.push('/payment-success');
     } else {
@@ -45,7 +44,7 @@ const PaymentScreen = ({ myRef }) => {
       // 2 happens when you select a 0-11jr ticket only
       const cartAmount = cart.length === 1 && cart[0].id === 3 ? 2 : 1;
       const amount = cartAmount;
-      console.log("amountPaid: " + amount);
+      console.log("Amount Paid = " + amount);
 
       const transactionId = makeid(10);
       const merchantReference = makeid(15);

@@ -31,7 +31,7 @@ function WelcomeScreen() {
 
   useEffect(() => {
     if (CountrySelected) {
-      console.log("Country Selected: " + CountrySelected);
+      console.log("Language Selected: " + CountrySelected);
       setTimeout(() => {
         history.push('/booking')
       }, 500);

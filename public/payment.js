@@ -123,7 +123,7 @@ window.payware = function (options) {
       .done(function (data) {
         result = data;
         if (isObject) {
-          console.log(data); //JSON.stringify(
+          // console.log(data); //JSON.stringify(
         }
         else {
           var msg = "Kimono: [" + data + "]";
@@ -239,7 +239,6 @@ window.payware = function (options) {
     inTransaction = true;
     return downloadUrl("payware/startpayment/" + url, true)
       .done(function (data) {
-        console.log("payment internal done");
         inTransaction = false;
         logFunction("startPayment " + url, true, "", "", data);
         showPaymentResult("startPayment", data);

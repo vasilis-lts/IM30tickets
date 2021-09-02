@@ -40,7 +40,6 @@ function BookingScreen() {
   const [Total, setTotal] = useState(0);
 
   useEffect(() => {
-    console.log(Cart);
     calculateTotal(Cart);
   }, [Cart]);
 
@@ -53,7 +52,6 @@ function BookingScreen() {
       total = total + totalPerItem;
     });
 
-    console.log(total);
     setTotal(total);
   }
 

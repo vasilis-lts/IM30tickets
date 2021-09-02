@@ -1,6 +1,6 @@
 import Screen from "../Components/Screen";
 import { useHistory } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const styles = {
   UserFlow: {
@@ -16,17 +16,21 @@ function UserFlow() {
   const [FlowIndexActive, setFlowIndexActive] = useState(0);
   const [FlowPhase, setFlowPhase] = useState("PrepareToEnter"); // PrepareToEnter | Entering | Next
 
+  let restartTimer = useRef(null);
+
   useEffect(() => {
     const detailsStr = localStorage.getItem("IM30_Details");
     if (detailsStr) {
       const details = JSON.parse(detailsStr)
       setCart(details.Cart);
     }
+    return () => {
+      clearTimeout(restartTimer.current);
+    };
   }, []);
 
   useEffect(() => {
     if (Cart.length) {
-      console.log(Cart)
       createFlow(Cart);
     }
   }, [Cart]);
@@ -40,7 +44,7 @@ function UserFlow() {
     }
     if (FlowPhase === "Next") {
       if (FlowIndexActive >= Flow.length) {
-        setTimeout(() => {
+        restartTimer.current = setTimeout(() => {
           history.push("/")
         }, 5000);
       }
@@ -53,7 +57,6 @@ function UserFlow() {
     const cartSorted = _Cart.sort(function (a, b) {
       return a.priority - b.priority;
     });
-    console.log(cartSorted);
 
     const flow = [];
     cartSorted.forEach(item => {
@@ -68,7 +71,6 @@ function UserFlow() {
       }
     });
 
-    console.log(flow);
     setFlow(flow);
   }
 
