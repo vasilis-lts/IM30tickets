@@ -17,6 +17,8 @@ function UserFlow() {
   const [FlowPhase, setFlowPhase] = useState("PrepareToEnter"); // PrepareToEnter | Entering | Next
 
   let restartTimer = useRef(null);
+  let pollInterval = useRef(null);
+  let pollInputRelayCount = useRef(null);
 
   useEffect(() => {
     const detailsStr = localStorage.getItem("IM30_Details");
@@ -26,6 +28,7 @@ function UserFlow() {
     }
     return () => {
       clearTimeout(restartTimer.current);
+      clearInterval(pollInterval.current);
     };
   }, []);
 
@@ -36,21 +39,48 @@ function UserFlow() {
   }, [Cart]);
 
   useEffect(() => {
-    if (FlowPhase === "Entering") {
-      setTimeout(() => {
-        setFlowIndexActive(FlowIndexActive + 1);
-        setFlowPhase("Next");
-      }, 2000);
+    handleFlow(FlowPhase);
+    // eslint-disable-next-line
+  }, [FlowPhase]);
+
+  async function handleFlow(flowPhase) {
+    if (flowPhase === "Entering") {
+      // open barrier
+      window.pay.setRelay(1, true, 250);
+
+      pollInputRelayCount.current = 0;
+      pollInterval.current = setInterval(async () => {
+        pollInputRelayCount.current += 1;
+        window.pay.getRelay(1);
+        let res = await window.pay.getRelay(1);
+
+        if (res && res.level) {
+          if (res.level === "HIGH") {
+            clearInterval(pollInterval.current);
+            setFlowIndexActive(FlowIndexActive + 1);
+            setFlowPhase("Next");
+          }
+        }
+
+        console.log(pollInputRelayCount.current);
+        if (pollInputRelayCount.current >= 100) {
+          clearInterval(pollInterval.current);
+          console.log("Interval end");
+        }
+
+      }, 200);
+
+
     }
-    if (FlowPhase === "Next") {
+    if (flowPhase === "Next") {
       if (FlowIndexActive >= Flow.length) {
         restartTimer.current = setTimeout(() => {
           history.push("/")
         }, 5000);
       }
     }
-    // eslint-disable-next-line
-  }, [FlowPhase]);
+  }
+
 
   function createFlow(Cart) {
     const _Cart = [...Cart]
@@ -84,7 +114,7 @@ function UserFlow() {
           <button
             style={{ width: 300, marginTop: 100 }}
             onClick={() => setFlowPhase('Entering')}
-            className="btn-lg">GA BINNEN!</button>
+            className="btn-lg payment-btn">GA BINNEN!</button>
         </> : null}
 
         {FlowPhase === "Entering" ? <>
@@ -95,14 +125,14 @@ function UserFlow() {
           <h1>TOEGANG<br /><br />SUCCESVOL</h1>
           {FlowIndexActive < Flow.length ?
             <button
-              style={{ width: 400, marginTop: 100 }}
+              style={{ marginTop: 100 }}
               onClick={() => setFlowPhase('PrepareToEnter')}
-              className="btn-lg">VOLGENDE</button>
+              className="btn-lg payment-btn">VOLGENDE</button>
             :
             <button
-              style={{ width: 400, marginTop: 100 }}
+              style={{ marginTop: 100 }}
               onClick={() => history.push("/")}
-              className="btn-lg">VOLGENDE KLANT</button>
+              className="btn-lg payment-btn">VOLGENDE KLANT</button>
           }
         </> : null}
       </div>

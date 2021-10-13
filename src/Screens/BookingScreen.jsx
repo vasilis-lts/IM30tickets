@@ -8,15 +8,11 @@ const styles = {
     margin: 2
   },
   bookingCtrlBtn: {
-    fontSize: "5rem",
     fontWeight: 700,
     border: "7px solid rgb(34, 34, 34)",
-    padding: "0px 15px",
-    width: 100,
     margin: 2,
   },
   bookingCtrlLabel: {
-    fontSize: "3rem",
     border: "7px solid rgb(34, 34, 34)",
     alignItems: "center",
     display: "flex",
@@ -96,7 +92,6 @@ function BookingScreen() {
   return (
     <Screen verticalAlign="flex-start">
       <div id="bookingScreen" style={{ width: "100%", height: "100%" }} className="flex-col">
-
         <div id="bookingControls">
           {jsonTickets.map(entry => {
             return (

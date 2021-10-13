@@ -16,13 +16,12 @@ function PaymentFailed() {
       <div className="PaymentFailed flex-col ai-center" style={styles.PaymentFailed}>
         <h1 style={{ width: "70%", marginBottom: 100 }}>BETALING MISLUKT !</h1>
         <button
-          style={{ width: 400 }}
           onClick={() => history.goBack()}
-          className="btn-lg">Probeer het opnieuw</button>
+          className="btn-lg payment-btn">Probeer het opnieuw</button>
         <button
-          style={{ width: 400, marginTop: 20 }}
+          style={{ marginTop: 20 }}
           onClick={() => history.push('/')}
-          className="btn-lg">Afbreken</button>
+          className="btn-lg payment-btn">Afbreken</button>
       </div>
     </Screen>
   );

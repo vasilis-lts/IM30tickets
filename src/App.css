@@ -80,8 +80,41 @@ html,body {
   padding: 10px 30px;
 }
 
+/* welcome  */
+#welcomeFlags img{
+  height:200px
+}
+#welcomeHeader{
+  font-size: 28px;
+}
 
-@media only screen and (orientation:landscape) and (max-width:1280px) {
+/* Booking */
+.booking-ctrl-elem button{
+  font-size: 80px;
+  width: 100px;
+}
+.booking-elem-label{
+  font-size: 46px;
+}
+
+/* PAYMENT */
+.payment-btn{
+  width: 400px;
+}
+.PaymentScreen{
+  font-size: 25px;
+}
+
+/* ReceiptScreen */
+.receipt-heading{
+  font-size: 46px;
+  margin-top: 0;
+}
+.ReceiptScreen button{
+  margin-top: 100px;
+}
+
+/* @media only screen and (orientation:landscape) and (max-width:1280px) {
   body {
     height: 100vw;
     transform: rotate(90deg);
@@ -89,4 +122,56 @@ html,body {
   #routeContainer{
     justify-content: initial;
   }
+} */
+
+@media only screen and (max-width:414px) {
+  .btn-lg{
+    font-size: 32px;
+  }
+  
+
+  #welcomeFlags img{
+    height:120px
+  }
+
+  #welcomeHeader{
+    font-size: 20px;
+  }
+
+  /* Booking */
+  .booking-ctrl-elem button{
+    font-size: 40px;
+    width: 17%;
+    padding-top: 5px;
+    padding-right: 7px;
+  }
+  .booking-elem-label{
+    font-size: 30px;
+  }
+  #cartContents{
+    font-size: 26px;
+    padding-top: 70px;
+  }
+  #cartCheckout {
+    height: 170px;
+  }
+
+  /* PAYMENT */
+  .payment-btn{
+    width: 300px;
+  }
+  .PaymentScreen{
+    font-size: 16px;
+  }
+  
+  .ReceiptScreen img{
+    width: 200px;
+  }
+  .receipt-heading{
+    font-size: 36px;
+  }
+  .ReceiptScreen button{
+    margin-top: 50px;
+  }
+
 }

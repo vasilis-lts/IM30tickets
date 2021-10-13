@@ -4,8 +4,9 @@ import { CircleFlag } from 'react-circle-flags'
 import { useHistory } from "react-router-dom";
 
 const styles = {
+
   welcomeHeader: {
-    fontSize: 22
+    marginTop: 0
   },
   welcomeText: {
     margin: 0,
@@ -15,12 +16,12 @@ const styles = {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
-    marginTop: 60,
+    marginTop: 30,
     width: "90%",
   },
   roundBorder: {
     borderRadius: "50%",
-    margin: 10
+    margin: 5
   }
 }
 
@@ -41,8 +42,8 @@ function WelcomeScreen() {
 
   return (
     <Screen verticalAlign="center">
-      <div className="WelcomeScreen flex-col ai-center">
-        <div id="welcome-header" style={styles.welcomeHeader}>
+      <div className="WelcomeScreen flex-col ai-center" style={styles.WelcomeScreen}>
+        <div id="welcomeHeader" style={styles.welcomeHeader}>
           <h1 style={styles.welcomeText}>WELKOM</h1>
           <h1 style={styles.welcomeText}>WELCOME</h1>
           <h1 style={styles.welcomeText}>BIEN VENUE</h1>
@@ -50,16 +51,16 @@ function WelcomeScreen() {
         </div>
         <div id="welcomeFlags" style={styles.welcomeFlags}>
           <div style={styles.roundBorder} className={`flag-round-border ${CountrySelected === "gb" ? "country-active" : ''}`} onClick={() => setCountrySelected("gb")}>
-            <CircleFlag countryCode="gb" height="200" />
+            <CircleFlag countryCode="gb" />
           </div>
           <div style={styles.roundBorder} className={`flag-round-border ${CountrySelected === "nl" ? "country-active" : ''}`} onClick={() => setCountrySelected("nl")}>
-            <CircleFlag countryCode="nl" height="200" />
+            <CircleFlag countryCode="nl" />
           </div>
           <div style={styles.roundBorder} className={`flag-round-border ${CountrySelected === "fr" ? "country-active" : ''}`} onClick={() => setCountrySelected("fr")}>
-            <CircleFlag countryCode="fr" height="200" />
+            <CircleFlag countryCode="fr" />
           </div>
           <div style={styles.roundBorder} className={`flag-round-border ${CountrySelected === "de" ? "country-active" : ''}`} onClick={() => setCountrySelected("de")}>
-            <CircleFlag countryCode="de" height="200" />
+            <CircleFlag countryCode="de" />
           </div>
         </div>
       </div>

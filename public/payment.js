@@ -279,10 +279,47 @@ window.payware = function (options) {
     return downloadUrl("payware/getdisplaymessages", true); //object
   };
 
-  this.setRelay = function (data) {
-    data = encodeURIComponent(data);
-    //https://kimono.trin-it.nl/api/kimono/relay/set/0/0
-    return downloadUrl("relay/set/" + data); //object
+  this.setRelay = function (port, highLowOption) {
+    //data = encodeURIComponent(data);
+    //https://kimono.trin-it.nl/api/kimono/relay/set/port/highLowOption
+    if (typeof highLowOption === 'boolean' || highLowOption instanceof Boolean) {
+      if (highLowOption) {
+        highLowOption = "HIGH";
+      }
+      else {
+        highLowOption = "LOW";
+      }
+    }
+    return downloadUrl("relay/set/" + port + "/" + highLowOption)
+      .done(function (data) {
+        console.log("setRelay done");
+        vars.onHandleSetRelayResult("setRelay", port, data);
+        return data;
+      })
+      .fail(function (jqXHR, textStatus, errorThrown) {
+        console.log("setRelay fail");
+        vars.onHandleSetRelayResult("setRelay", port, null);
+        return null;
+      });
+  };
+
+  this.getRelay = function (port) {
+    return downloadUrl("relay/get/" + port)
+      .done(function (data) {
+        console.log("getRelay done");
+        console.log(data);
+        var result = false;
+        if (data && data.level) {
+          result = data.level == "HIGH";
+        }
+        vars.onHandleGetRelayResult("getRelay", port, result);
+        return data;
+      })
+      .fail(function (jqXHR, textStatus, errorThrown) {
+        console.log("getRelay fail");
+        vars.onHandleGetRelayResult("getRelay", port, null);
+        return null;
+      });
   };
 
   this.construct(options);

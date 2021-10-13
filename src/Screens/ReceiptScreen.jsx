@@ -15,12 +15,11 @@ function ReceiptScreen() {
   return (
     <Screen verticalAlign="center">
       <div className="ReceiptScreen flex-col ai-center" style={styles.ReceiptScreen}>
-        <h5 style={{ width: "60%", fontSize: "36px" }}>Scan QR-code voor betaalbewijs</h5>
+        <h5 className="receipt-heading" style={{ width: "60%" }}>Scan QR-code voor betaalbewijs</h5>
         <img src="qr-code.png" alt="qr" />
         <button
-          style={{ width: 300, marginTop: 100 }}
           onClick={() => history.push('/user-flow')}
-          className="btn-lg">Naar binnen</button>
+          className="btn-lg payment-btn">Naar binnen</button>
       </div>
     </Screen>
   );

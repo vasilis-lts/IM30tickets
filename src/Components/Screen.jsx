@@ -4,8 +4,8 @@ function Screen(props) {
     <div
       style={{
         display: "flex",
-        height: "1280px",
-        width: "720px",
+        height: "100%",
+        width: "100%",
         justifyContent: "center",
         textAlign: "center",
         alignItems: props.verticalAlign,

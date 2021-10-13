@@ -1,15 +1,7 @@
 import Screen from "../Components/Screen";
 import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { makeid } from "../PaymentLogic/helper";
-
-const styles = {
-  paymentScreen: {
-    fontSize: 25,
-    marginTop: 400
-  },
-
-}
+import { handleGetRelayResult, handleSetRelayResult, makeid } from "../PaymentLogic/helper";
 
 const PaymentScreen = ({ myRef }) => {
 
@@ -35,7 +27,6 @@ const PaymentScreen = ({ myRef }) => {
     }
   }
 
-
   function startPayment() {
     const details = JSON.parse(localStorage.getItem('IM30_Details'));
     const cart = details.Cart;
@@ -49,21 +40,23 @@ const PaymentScreen = ({ myRef }) => {
       const transactionId = makeid(10);
       const merchantReference = makeid(15);
 
-      let pay = new window.payware({
+      window.pay = new window.payware({
         url: "http://localhost:5000/api/kimono/",
-        onPaymentResultReceived: resultReceived
+        onPaymentResultReceived: resultReceived,
+        onHandleSetRelayResult: handleSetRelayResult,
+        onHandleGetRelayResult: handleGetRelayResult
       });
 
-      window.pay = pay;
-      pay.startPayment(amount, transactionId, merchantReference);
+      // window.pay = pay;
+      window.pay.startPayment(amount, transactionId, merchantReference);
     } else {
       alert('Error with Cart')
     }
   };
 
   return (
-    <Screen verticalAlign="flex-start">
-      <div className="PaymentScreen flex-col ai-center" style={styles.paymentScreen}>
+    <Screen verticalAlign="center">
+      <div className="PaymentScreen flex-col ai-center">
         <h1 style={{ letterSpacing: 10 }}>AFREKENEN</h1>
         <h2>BEDRAG</h2>
         {Total && <h2>{Total.toFixed(2).replace(".", ",")}</h2>}
