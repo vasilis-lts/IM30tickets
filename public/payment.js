@@ -191,6 +191,7 @@ window.payware = function (options) {
 
   var showPaymentResult = function (name, data) {
     hideMessages();
+    console.log(data)
     if (name && vars.onPaymentResultReceived) {
       vars.onPaymentResultReceived(name, data);
     }
@@ -239,6 +240,7 @@ window.payware = function (options) {
     inTransaction = true;
     return downloadUrl("payware/startpayment/" + url, true)
       .done(function (data) {
+        console.log("payment internal done");
         inTransaction = false;
         logFunction("startPayment " + url, true, "", "", data);
         showPaymentResult("startPayment", data);

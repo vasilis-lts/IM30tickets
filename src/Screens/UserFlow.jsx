@@ -46,13 +46,12 @@ function UserFlow() {
   async function handleFlow(flowPhase) {
     if (flowPhase === "Entering") {
       // open barrier
-      window.pay.setRelay(1, true, 250);
+      window.pay.setRelay(2, true, 250);
 
       pollInputRelayCount.current = 0;
       pollInterval.current = setInterval(async () => {
         pollInputRelayCount.current += 1;
-        window.pay.getRelay(1);
-        let res = await window.pay.getRelay(1);
+        let res = await window.pay.getRelay(2);
 
         if (res && res.level) {
           if (res.level === "HIGH") {

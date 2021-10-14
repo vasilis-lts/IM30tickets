@@ -10,10 +10,10 @@ export function makeid(length) {
 
 export function handleSetRelayResult(name, port, data) {
   if (data) {
-    alert('Relay set port ' + port + ' success');
+    // alert('Relay set port ' + port + ' success');
   }
   else {
-    alert('Relay set port ' + port + ' FAILURE');
+    // alert('Relay set port ' + port + ' FAILURE');
   }
 }
 

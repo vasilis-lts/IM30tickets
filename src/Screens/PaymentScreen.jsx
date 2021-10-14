@@ -30,11 +30,9 @@ const PaymentScreen = ({ myRef }) => {
   function startPayment() {
     const details = JSON.parse(localStorage.getItem('IM30_Details'));
     const cart = details.Cart;
+    const totalAmount = details.Total;
     if (cart) {
-      // set amount 1 (success) or 2 (failure) for now. 
-      // 2 happens when you select a 0-11jr ticket only
-      const cartAmount = cart.length === 1 && cart[0].id === 3 ? 2 : 1;
-      const amount = cartAmount;
+      const amount = totalAmount * 100;
       console.log("Amount Paid = " + amount);
 
       const transactionId = makeid(10);
@@ -47,7 +45,6 @@ const PaymentScreen = ({ myRef }) => {
         onHandleGetRelayResult: handleGetRelayResult
       });
 
-      // window.pay = pay;
       window.pay.startPayment(amount, transactionId, merchantReference);
     } else {
       alert('Error with Cart')
