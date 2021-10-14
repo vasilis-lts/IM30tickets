@@ -51,7 +51,7 @@ function UserFlow() {
       pollInputRelayCount.current = 0;
       pollInterval.current = setInterval(async () => {
         pollInputRelayCount.current += 1;
-        let res = await window.pay.getRelay(2);
+        let res = await window.pay.getRelay(1);
 
         if (res && res.level) {
           if (res.level === "HIGH") {

@@ -2,6 +2,7 @@ import Screen from "../Components/Screen";
 import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { handleGetRelayResult, handleSetRelayResult, makeid } from "../PaymentLogic/helper";
+import BASE_URL from "../apiSettings";
 
 const PaymentScreen = ({ myRef }) => {
 
@@ -38,8 +39,10 @@ const PaymentScreen = ({ myRef }) => {
       const transactionId = makeid(10);
       const merchantReference = makeid(15);
 
+      console.log(BASE_URL)
+
       window.pay = new window.payware({
-        url: "http://localhost:5000/api/kimono/",
+        url: BASE_URL,
         onPaymentResultReceived: resultReceived,
         onHandleSetRelayResult: handleSetRelayResult,
         onHandleGetRelayResult: handleGetRelayResult
