@@ -191,7 +191,6 @@ window.payware = function (options) {
 
   var showPaymentResult = function (name, data) {
     hideMessages();
-    console.log(data)
     if (name && vars.onPaymentResultReceived) {
       vars.onPaymentResultReceived(name, data);
     }
@@ -240,7 +239,6 @@ window.payware = function (options) {
     inTransaction = true;
     return downloadUrl("payware/startpayment/" + url, true)
       .done(function (data) {
-        console.log("payment internal done");
         inTransaction = false;
         logFunction("startPayment " + url, true, "", "", data);
         showPaymentResult("startPayment", data);
@@ -281,26 +279,54 @@ window.payware = function (options) {
     return downloadUrl("payware/getdisplaymessages", true); //object
   };
 
-  this.setRelay = function (port, highLowOption) {
-    //data = encodeURIComponent(data);
-    //https://kimono.trin-it.nl/api/kimono/relay/set/port/highLowOption
+  this.convertHighLowOption = function (highLowOption) {
     if (typeof highLowOption === 'boolean' || highLowOption instanceof Boolean) {
       if (highLowOption) {
-        highLowOption = "HIGH";
+        return "HIGH";
       }
       else {
-        highLowOption = "LOW";
+        return "LOW";
       }
     }
+    return highLowOption;
+  }
+
+  var doHandleSetRelayResult = function (success, port, data) {
+    console.log("setRelay " + success);
+    vars.onHandleSetRelayResult("setRelay", port, data);
+    return data;
+  }
+
+  this.setRelay = function (port, highLowOption, duration) {
+    highLowOption = this.convertHighLowOption(highLowOption);
     return downloadUrl("relay/set/" + port + "/" + highLowOption)
       .done(function (data) {
-        console.log("setRelay done");
-        vars.onHandleSetRelayResult("setRelay", port, data);
-        return data;
+        if (duration) {
+          setTimeout(function () {
+            if (highLowOption == "HIGH") {
+              highLowOption = "LOW";
+            }
+            else {
+              highLowOption = "HIGH";
+            }
+            return downloadUrl("relay/set/" + port + "/" + highLowOption)
+              .done(function (data) {
+                doHandleSetRelayResult("done", port, data);
+                return data;
+              })
+              .fail(function (jqXHR, textStatus, errorThrown) {
+                doHandleSetRelayResult("fail", port, null);
+                return null;
+              });
+          }, duration);
+        }
+        else {
+          doHandleSetRelayResult("done", port, data);
+          return data;
+        }
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
-        console.log("setRelay fail");
-        vars.onHandleSetRelayResult("setRelay", port, null);
+        doHandleSetRelayResult("fail", port, null);
         return null;
       });
   };
